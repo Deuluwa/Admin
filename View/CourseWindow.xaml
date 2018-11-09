@@ -24,11 +24,20 @@
         <TextBox x:Name="classNameLabel" HorizontalAlignment="Left" Height="23" Margin="77,72,0,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="강의실 선택" VerticalAlignment="Top" Width="413"  FontWeight="Bold"/>
         <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="77,104,0,0" VerticalAlignment="Top" Width="173"  FontWeight="Bold"/>
         <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="317,104,0,0" VerticalAlignment="Top" Width="173" FontWeight="Bold"/>
-        <xctk:DateTimeUpDown x:Name="startTime"  Value="12:00" Format="Custom" FormatString="HH:mm" Margin="77,135,547,358" FontWeight="Bold"/>
+        <xctk:DateTimeUpDown x:Name="startTime"  Value="12:00" Format="Custom" FormatString="HH:mm" Margin="77,135,547,363" FontWeight="Bold"/>
         <TextBox x:Name="runningTimeLabel" HorizontalAlignment="Left" Height="23" Margin="317,135,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="173"  FontWeight="Bold"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="삭제" HorizontalAlignment="Left" Margin="707,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="적용" HorizontalAlignment="Left" Margin="532,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White"/>
-        <DataGrid HorizontalAlignment="Left" Height="317" Margin="10,196,0,0" VerticalAlignment="Top" Width="517"/>
-        <Label Content="수강생 목록" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="적용" HorizontalAlignment="Left" Margin="532,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="SaveCourseInformation"/>
+        <DataGrid HorizontalAlignment="Left" Height="279" Margin="10,234,0,0" VerticalAlignment="Top" Width="517"/>
+        <Label Content="수강생 목록" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="시작 시간" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="진행 요일" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ToggleButton x:Name="monCheck" Content="월" HorizontalAlignment="Left" Margin="77,165,0,0"  VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="tueCheck" Content="화" HorizontalAlignment="Left" Margin="136,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="wedCheck" Content="수" HorizontalAlignment="Left" Margin="195,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="thuCheck" Content="목" HorizontalAlignment="Left" Margin="254,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="friCheck" Content="금" HorizontalAlignment="Left" Margin="313,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="satCheck" Content="토" HorizontalAlignment="Left" Margin="372,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+        <ToggleButton x:Name="sunCheck" Content="일" HorizontalAlignment="Left" Margin="431,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
     </Grid>
 </Controls:MetroWindow>
