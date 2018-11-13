@@ -41,6 +41,10 @@
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.0.0-alpha0189\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="DeuluwaCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DeuluwaCore\bin\Release\DeuluwaCore.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.0.0-alpha0095\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -157,12 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DeuluwaCore\DeuluwaCore.csproj">
-      <Project>{2cf68493-8150-4110-858f-ea544f1b7546}</Project>
-      <Name>DeuluwaCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
