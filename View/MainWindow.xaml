@@ -40,14 +40,14 @@
             Margin="10,511,10,10"
             AutoGenerateColumns="False" IsReadOnly="True"
             SelectionUnit="FullRow" HorizontalScrollBarVisibility="Disabled">
+            
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
-                    <!-- Update from comments.
-                 Remove the focus indication for the selected cell -->
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.CellStyle>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="numberColumn" Header="번호" Binding="{Binding Path=index}"/>
                 <DataGridTextColumn x:Name="messageColumn" Header="메시지" Binding="{Binding Path=message}" Width="560"/>

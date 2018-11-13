@@ -137,7 +137,6 @@ namespace DeuluwaPIM.View
             NoticeWindow window = new NoticeWindow(false, item.index);
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
-
         }
 
         

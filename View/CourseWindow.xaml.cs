@@ -12,6 +12,7 @@ namespace DeuluwaPIM.View
     {
         System.Windows.Controls.Primitives.ToggleButton[] dayCheckControls;
         List<CourseInformation> courseInformationList;
+        List<User> courseStudentList;
         public CourseWindow()
         {
             InitializeComponent();
@@ -115,6 +116,7 @@ namespace DeuluwaPIM.View
             SetDate(course.coursedate);
             SetTime(course.courseStartTimeOrigin, course.courseEndTimeOrigin);
             SetDayCheck(course.classdayOrigin);
+            GetUserList(course.index);
         }
 
         private void SetDate(string dateRangeString)
@@ -157,12 +159,55 @@ namespace DeuluwaPIM.View
 
         private void TeacherTextBoxClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            var searchWindow = new SearchWindow(SearchWindow.Category.USERNAME)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
 
+            searchWindow.exitActionEvent += TeacherSet;
+
+            searchWindow.ShowDialog();
+        }
+
+        private void TeacherSet(List<string> result)
+        {
+            teacherLabel.Text = result[1] + "(" + result[0] + ")";
         }
 
         private void ClassNameMouseClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            var searchWindow = new SearchWindow(SearchWindow.Category.CLASSNAME)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
 
+            searchWindow.exitActionEvent += RoomSet;
+
+            searchWindow.ShowDialog();
         }
+
+        private void RoomSet(List<string> result)
+        {
+            classNameLabel.Text = result[1] + "(" + result[0] + ")";
+        }
+
+        private async void GetUserList(string courseid)
+        {
+            var httpResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "coursestudentlist/?courseid=" + courseid);
+
+            if (httpResult == "NO RESULT") return;
+
+            var jsonList = DeuluwaCore.Controller.JsonConverter.GetDictionaryList(httpResult);
+
+            courseStudentList = new List<User>();
+
+            foreach(var json in jsonList)
+            {
+                courseStudentList.Add(new User(json));
+            }
+
+            userListDataGrid.ItemsSource = courseStudentList;
+        }
+
     }
 }

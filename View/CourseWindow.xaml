@@ -10,18 +10,6 @@
         mc:Ignorable="d"
         Title="CourseWindow" Height="552" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <DataGrid x:Name="courseListGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="459" Margin="532,10,0,0" VerticalAlignment="Top" Width="250" IsReadOnly="True" SelectionChanged="CourseListSelcetionChanged">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                </Style>
-            </DataGrid.CellStyle>
-
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="courseNameColumn" Header="수업 명" Binding="{Binding Path=coursename}" Width="250"/>
-            </DataGrid.Columns>
-        </DataGrid>
         <Label Content="수업 명" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="강사 명" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="강의실 명" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -39,7 +27,6 @@
         <TextBox x:Name="runningTimeLabel" HorizontalAlignment="Left" Height="23" Margin="317,135,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="173"  FontWeight="Bold"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="삭제" HorizontalAlignment="Left" Margin="707,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="적용" HorizontalAlignment="Left" Margin="532,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="SaveCourseInformation"/>
-        <DataGrid HorizontalAlignment="Left" Height="279" Margin="10,234,0,0" VerticalAlignment="Top" Width="517"/>
         <Label Content="수강생 목록" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="시작 시간" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="진행 요일" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -50,5 +37,31 @@
         <ToggleButton x:Name="friCheck" Content="금" HorizontalAlignment="Left" Margin="313,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
         <ToggleButton x:Name="satCheck" Content="토" HorizontalAlignment="Left" Margin="372,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
         <ToggleButton x:Name="sunCheck" Content="일" HorizontalAlignment="Left" Margin="431,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
+
+        <DataGrid x:Name="courseListGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="459" Margin="532,10,0,0" VerticalAlignment="Top" Width="250" IsReadOnly="True" SelectionChanged="CourseListSelcetionChanged">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="courseNameColumn" Header="수업 명" Binding="{Binding Path=coursename}" Width="250"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="userListDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="279" Margin="10,234,0,0" VerticalAlignment="Top" Width="517">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="180" IsReadOnly="True"/>
+                <DataGridTextColumn Header="이름" Binding="{Binding Path=name}" Width="337" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Controls:MetroWindow>
