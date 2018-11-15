@@ -1,4 +1,5 @@
 ﻿using DeuluwaCore.Model;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -13,6 +14,8 @@ namespace DeuluwaPIM.View
         System.Windows.Controls.Primitives.ToggleButton[] dayCheckControls;
         List<CourseInformation> courseInformationList;
         List<User> courseStudentList;
+        string courseId = "";
+
         public CourseWindow()
         {
             InitializeComponent();
@@ -49,9 +52,71 @@ namespace DeuluwaPIM.View
             SetDayCheck("FFFFFFF");
         }
 
-        private void CourseCreateButton(object sender, RoutedEventArgs e)
+        private Dictionary<string, string> GetCourseInformation(string mode)
         {
-            NewCourseSetting();
+            Dictionary<string, string> addData = new Dictionary<string, string>();
+
+            addData.Add("mode", mode);
+
+            string userid = teacherLabel.Text.Substring(
+                teacherLabel.Text.LastIndexOf('(') + 1,
+                teacherLabel.Text.LastIndexOf(')') - teacherLabel.Text.LastIndexOf('(') - 1
+                );
+
+            addData.Add("teacher", userid);
+
+            string roomIndex = classNameLabel.Text.Substring(
+                classNameLabel.Text.LastIndexOf('(') + 1,
+                classNameLabel.Text.LastIndexOf(')') - classNameLabel.Text.LastIndexOf('(') - 1
+                );
+
+            addData.Add("room", roomIndex);
+
+            addData.Add("startdate", string.Format("{0:0000}-{1:00}-{2:00}",
+                startDatePicker.SelectedDate.Value.Date.Year,
+                startDatePicker.SelectedDate.Value.Date.Month,
+                startDatePicker.SelectedDate.Value.Date.Day));
+
+            addData.Add("enddate", string.Format("{0:0000}-{1:00}-{2:00}",
+                endDatePicker.SelectedDate.Value.Date.Year,
+                endDatePicker.SelectedDate.Value.Date.Month,
+                endDatePicker.SelectedDate.Value.Date.Day));
+
+            addData.Add("starttime", string.Format("{0:00}{1:00}",
+                startTimePicker.Value.Value.Hour,
+                startTimePicker.Value.Value.Minute));
+
+            addData.Add("runningtime", runningTimeLabel.Text);
+
+            addData.Add("classday", GetDayCheck());
+
+            addData.Add("coursename", courseNameLabel.Text);
+
+            return addData;
+        }
+
+        private async void CourseCreateButton(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, string> courseInformation = GetCourseInformation("add");
+
+            string data = "";
+
+            foreach(KeyValuePair<string, string> ci in courseInformation)
+            {
+                data += "&" + ci.Key + "=" + ci.Value;
+            }
+
+            data = data.Remove(0, 1);
+        
+            var insertResult = await DeuluwaCore.Constants.HttpRequestPost(DeuluwaCore.Constants.shared.GetData("url") + "managecourse/", data);
+
+            if (!insertResult.Contains("success")) return;
+
+            string insertCourseId = insertResult.Substring(10, insertResult.Length - 10);
+
+            courseId = insertCourseId;
+
+            GetCourseInformationList(false);
         }
 
         private string GetDayCheck()
@@ -81,9 +146,25 @@ namespace DeuluwaPIM.View
             }
         }
 
-        private void SaveCourseInformation(object sender, RoutedEventArgs e)
+        private async void SaveCourseInformation(object sender, RoutedEventArgs e)
         {
-            
+            Dictionary<string, string> courseInformation = GetCourseInformation("modify");
+            courseInformation.Add("courseid", courseId);
+
+            string data = "";
+
+            foreach (KeyValuePair<string, string> ci in courseInformation)
+            {
+                data += "&" + ci.Key + "=" + ci.Value;
+            }
+
+            data = data.Remove(0, 1);
+
+            var insertResult = await DeuluwaCore.Constants.HttpRequestPost(DeuluwaCore.Constants.shared.GetData("url") + "managecourse/", data);
+
+            if (!insertResult.Contains("success")) return;
+
+            GetCourseInformationList(false);
         }
 
         private async void GetCourseInformationList(bool first)
@@ -105,7 +186,18 @@ namespace DeuluwaPIM.View
                 courseListGrid.SelectedIndex = 0;
             }
 
-
+            else {
+                int i = 0;
+                foreach(var courseinfo in courseInformationList)
+                {
+                    if (courseinfo.index == courseId)
+                    {
+                        courseListGrid.SelectedIndex = i;
+                        return;
+                    }
+                    i++;
+                }
+            }
         }
 
         private void ViewCourseInfo(CourseInformation course)
@@ -117,6 +209,7 @@ namespace DeuluwaPIM.View
             SetTime(course.courseStartTimeOrigin, course.courseEndTimeOrigin);
             SetDayCheck(course.classdayOrigin);
             GetUserList(course.index);
+            courseId = course.index;
         }
 
         private void SetDate(string dateRangeString)
@@ -195,19 +288,117 @@ namespace DeuluwaPIM.View
         {
             var httpResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "coursestudentlist/?courseid=" + courseid);
 
+            courseStudentList = new List<User>();
+
+            userListDataGrid.ItemsSource = courseStudentList;
+
             if (httpResult == "NO RESULT") return;
 
             var jsonList = DeuluwaCore.Controller.JsonConverter.GetDictionaryList(httpResult);
-
-            courseStudentList = new List<User>();
 
             foreach(var json in jsonList)
             {
                 courseStudentList.Add(new User(json));
             }
 
-            userListDataGrid.ItemsSource = courseStudentList;
+            userListDataGrid.Items.Refresh();
         }
 
+        private void AddStudentClick(object sender, RoutedEventArgs e)
+        {
+            var searchWindow = new SearchWindow(SearchWindow.Category.USERNAME)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            searchWindow.exitActionEvent += AddStudent;
+
+            searchWindow.ShowDialog();
+        }
+
+        private async void AddStudent(List<string> result)
+        {
+            if (courseId == "") return;
+
+            string postData = string.Format("courseid={0}&userid={1}&mode=add", courseId, result[0]);
+
+            string postResult = await DeuluwaCore.Constants.HttpRequestPost(DeuluwaCore.Constants.shared.GetData("url") + "managestudenttocourse/", postData);
+
+            if(postResult != "success")
+            {
+                await this.ShowMessageAsync("등록 실패", postResult+"\r\n 나중에 다시 시도해 주세요", MessageDialogStyle.Affirmative, Constants.metroDialogSettings);
+                return;
+            }
+
+            GetUserList(courseId);
+        }
+
+        private async void DeleteStudentMenuClick(object sender, RoutedEventArgs e)
+        {
+            if (courseId == "") return;
+
+            try
+            {
+                var user = userListDataGrid.SelectedItem as User;
+
+                string postData = string.Format("courseid={0}&userid={1}&mode=delete", courseId, user.id);
+
+                string postResult = await DeuluwaCore.Constants.HttpRequestPost(DeuluwaCore.Constants.shared.GetData("url") + "managestudenttocourse/", postData);
+
+                if (postResult != "success")
+                {
+                    await this.ShowMessageAsync("삭제 실패", postResult + "\r\n 나중에 다시 시도해 주세요", MessageDialogStyle.Affirmative, Constants.metroDialogSettings);
+                    return;
+                }
+
+                GetUserList(courseId);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void AddStudentMenuClick(object sender, RoutedEventArgs e)
+        {
+            var searchWindow = new SearchWindow(SearchWindow.Category.USERNAME)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            searchWindow.exitActionEvent += AddStudent;
+
+            searchWindow.ShowDialog();
+        }
+
+        private void ClearCorurseInformation(object sender, RoutedEventArgs e)
+        {
+            NewCourseSetting();
+        }
+
+        private async void DeleteCourseInformation(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, string> courseInformation = new Dictionary<string, string>();
+
+            courseInformation.Add("mode", "delete");
+            courseInformation.Add("courseid", courseId);
+
+            string data = "";
+
+            foreach (KeyValuePair<string, string> ci in courseInformation)
+            {
+                data += "&" + ci.Key + "=" + ci.Value;
+            }
+
+            data = data.Remove(0, 1);
+
+            var insertResult = await DeuluwaCore.Constants.HttpRequestPost(DeuluwaCore.Constants.shared.GetData("url") + "managecourse/", data);
+
+            if (!insertResult.Contains("success")) return;
+
+            courseId = "";
+
+            GetCourseInformationList(true);
+        }
     }
 }

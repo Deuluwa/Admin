@@ -25,7 +25,7 @@
         <DatePicker x:Name="endDatePicker" HorizontalAlignment="Left" Margin="317,104,0,0" VerticalAlignment="Top" Width="173" FontWeight="Bold"/>
         <xctk:DateTimeUpDown x:Name="startTimePicker"  Value="12:00" Format="Custom" FormatString="HH:mm" Margin="77,135,547,363" FontWeight="Bold"/>
         <TextBox x:Name="runningTimeLabel" HorizontalAlignment="Left" Height="23" Margin="317,135,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="173"  FontWeight="Bold"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="삭제" HorizontalAlignment="Left" Margin="707,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="삭제" HorizontalAlignment="Left" Margin="707,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="DeleteCourseInformation"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="적용" HorizontalAlignment="Left" Margin="532,474,0,0" VerticalAlignment="Top" Width="75" Height="39" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="SaveCourseInformation"/>
         <Label Content="수강생 목록" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="시작 시간" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -62,6 +62,14 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="180" IsReadOnly="True"/>
                 <DataGridTextColumn Header="이름" Binding="{Binding Path=name}" Width="337" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header = "추가" Click="AddStudentMenuClick"/>
+                    <MenuItem Header = "삭제" Click="DeleteStudentMenuClick"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="학생 추가" HorizontalAlignment="Left" Margin="452,203,0,0" VerticalAlignment="Top" Width="75" Height="26" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="AddStudentClick"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="X" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="37" Height="26" FontWeight="Bold" BorderBrush="White" Foreground="White" Click="ClearCorurseInformation"/>
     </Grid>
 </Controls:MetroWindow>
