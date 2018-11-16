@@ -63,7 +63,24 @@ namespace DeuluwaPIM.View
         private void CheckManagement(object sender, RoutedEventArgs e)
         {
             //출석 관리
-            
+            var searchWindow = new SearchWindow(SearchWindow.Category.COURSENAME)
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            searchWindow.exitActionEvent += AttendanceWindowOpen;
+
+            searchWindow.ShowDialog();
+        }
+
+        private void AttendanceWindowOpen(List<string> result)
+        {
+            var attendanceWindow = new AttendanceManagement(result[0])
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            attendanceWindow.ShowDialog();
         }
 
         private void CourseManagement(object sender, RoutedEventArgs e)

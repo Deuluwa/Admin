@@ -90,6 +90,14 @@ namespace DeuluwaPIM.View
                 categoryKeyword = "roomlist";
                 if (keyword != "") categoryKeyword += "/?roomname=" + keyword;
             }
+
+            else if(category == Category.COURSENAME)
+            {
+                categoryKeyword = "courseinformation";
+                if (keyword != "") categoryKeyword += "/?coursename=" + keyword;
+            }
+
+            else { return; }
             var resultString = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + categoryKeyword);
 
             if (resultString == "NO RESULT") return;

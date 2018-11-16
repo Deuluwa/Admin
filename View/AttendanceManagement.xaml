@@ -1,0 +1,38 @@
+﻿<Controls:MetroWindow x:Class="DeuluwaPIM.View.AttendanceManagement"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeuluwaPIM.View"
+        mc:Ignorable="d"
+        Title="출석 관리" Height="368.962" Width="800">
+    <Grid>
+        <DataGrid x:Name="dateDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" AutoGenerateColumns="False" SelectionChanged="DateChanged">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="날짜" Binding="{Binding Path=date}" Width="200"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        <DataGrid x:Name="userDataGrid" HorizontalAlignment="Left" Height="286" Margin="215,10,0,0" VerticalAlignment="Top" Width="567" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="140"/>
+                <DataGridTextColumn Header="이름" Binding="{Binding Path=name}" Width="157"/>
+                <DataGridTextColumn Header="출석여부" Binding="{Binding Path=check}" Width="70"/>
+                <DataGridTextColumn Header="출석시간" Binding="{Binding Path=time}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="일괄 출석" HorizontalAlignment="Left" Margin="707,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="결석" HorizontalAlignment="Left" Margin="627,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="지각" HorizontalAlignment="Left" Margin="547,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="출석" HorizontalAlignment="Left" Margin="467,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
+
+    </Grid>
+</Controls:MetroWindow>
