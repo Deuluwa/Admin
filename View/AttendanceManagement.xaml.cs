@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DeuluwaPIM.View
 {
@@ -34,21 +24,20 @@ namespace DeuluwaPIM.View
             public string id { get; set; }
             public string name { get; set; }
             public string check { get; set; }
-            public string time { get; set; }
+            public DateTime time { get; set; }
 
-            public CheckClass(Dictionary<string, string> value)
+            public CheckClass(Dictionary<string, string> value, string currentDate)
             {
                 id = value["userid"];
                 name = value["name"];
                 check = value["checked"] == "0" ? "출석" : value["checked"] == "1" ? "지각" : "결석";
 
-                time = value["checktime"].Trim();
-                time = Convert.ToInt32(time.Substring(0, 2)) >= 12 ?
-                "PM " + string.Format("{0:00}:{1}", Convert.ToInt32(time.Substring(0, 2)) - 12, time.Substring(2, 2)) :
-                "AM " + time;
+                var timeStr = value["checktime"].Trim();
+                time = DateTime.ParseExact(currentDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                TimeSpan ts = new TimeSpan(Convert.ToInt32(timeStr.Substring(0, 2)), Convert.ToInt32(timeStr.Substring(2, 2)), 0);
+                time = time.Date + ts;
             }
         }
-
 
         string courseId = "";
         List<DateClass> dateList;
@@ -93,7 +82,7 @@ namespace DeuluwaPIM.View
 
             foreach(var result in resultList)
             {
-                checkList.Add(new CheckClass(result));
+                checkList.Add(new CheckClass(result, date));
             }
 
             userDataGrid.ItemsSource = checkList;
@@ -103,6 +92,77 @@ namespace DeuluwaPIM.View
         {
             string date = (dateDataGrid.SelectedItem as DateClass).date;
             LoadCheckData(date);
+        }
+
+        //일괄 출석
+        private async void AllCheck_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var date = (dateDataGrid.SelectedItem as DateClass).date;
+            var requestResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "updateattendance/" +
+                "?courseid=" + courseId + "&date=" + date + "&mode=" + "allcheck");
+
+            if (requestResult == "success") LoadCheckData(date);
+        }
+
+        //출석
+        private async void Check_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var date = (dateDataGrid.SelectedItem as DateClass).date;
+            var userId = (userDataGrid.SelectedItem as CheckClass).id;
+
+            var requestResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "updateattendance/" +
+                "?courseid=" + courseId + "&date=" + date + "&mode=" + "check" + "&userid=" + userId);
+
+            if (requestResult == "success") LoadCheckData(date);
+        }
+
+        //결석
+        private async void Absent_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var date = (dateDataGrid.SelectedItem as DateClass).date;
+            var userId = (userDataGrid.SelectedItem as CheckClass).id;
+
+            var requestResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "updateattendance/" +
+                "?courseid=" + courseId + "&date=" + date + "&mode=" + "absent" + "&userid=" + userId);
+
+            if (requestResult == "success") LoadCheckData(date);
+        }
+
+        //지각
+        private async void Tardy_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var date = (dateDataGrid.SelectedItem as DateClass).date;
+            var userId = (userDataGrid.SelectedItem as CheckClass).id;
+
+            var requestResult = await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "updateattendance/" +
+                "?courseid=" + courseId + "&date=" + date + "&mode=" + "tardy" + "&userid=" + userId);
+
+            if (requestResult == "success") LoadCheckData(date);
+        }
+
+        //적용
+        private async void Save_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var date = (dateDataGrid.SelectedItem as DateClass).date;
+
+            foreach(var check in checkList)
+            {
+                await DeuluwaCore.Constants.HttpRequest(DeuluwaCore.Constants.shared.GetData("url") + "updateattendance/" +
+                "?courseid=" + courseId + "&date=" + date + "&mode=" + "update" + "&userid=" + check.id + 
+                "&updatetime=" + string.Format("{0:00}{1:00}", check.time.Hour, check.time.Minute));
+            }
+
+            LoadCheckData(date);
+        }
+
+        private void CheckTimePicker_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        {
+            var time = sender as Xceed.Wpf.Toolkit.DateTimeUpDown;
+            try
+            {
+                (userDataGrid.CurrentCell.Item as CheckClass).time = (DateTime)time.Value;
+            }
+            catch { }
         }
     }
 }

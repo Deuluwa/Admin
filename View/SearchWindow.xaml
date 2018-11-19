@@ -5,10 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
-        mc:Ignorable="d" Height="427.118" Width="567.373" ResizeMode="NoResize" PreviewKeyDown="MetroWindow_PreviewKeyDown">
+                      
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ShowTitleBar="False"
+                      ShowCloseButton="False" 
+        mc:Ignorable="d" Height="427.118" Width="567.373" ResizeMode="NoResize" PreviewKeyDown="MetroWindow_PreviewKeyDown" Closed="MetroWindow_Closed">
     <Grid>
         <TextBox x:Name="searchKeywordTextBox" HorizontalAlignment="Left" Controls:TextBoxHelper.Watermark="검색어 입력" Height="35" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="442" FontWeight="Bold" FontSize="16" PreviewKeyDown="searchKeywordTextBox_PreviewKeyDown"/>
-        <DataGrid x:Name="resultDataGrid" HorizontalAlignment="Left" Height="336" Margin="10,50,0,0" VerticalAlignment="Top" Width="539" AutoGenerateColumns="False">
+        <DataGrid x:Name="resultDataGrid" SelectionMode="Single" HorizontalAlignment="Left" Height="336" Margin="10,50,0,0" VerticalAlignment="Top" Width="539" AutoGenerateColumns="False">
             
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">

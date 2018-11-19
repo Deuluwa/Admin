@@ -38,7 +38,7 @@
         <ToggleButton x:Name="satCheck" Content="토" HorizontalAlignment="Left" Margin="372,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
         <ToggleButton x:Name="sunCheck" Content="일" HorizontalAlignment="Left" Margin="431,165,0,0" VerticalAlignment="Top" Width="59" FontSize="14"/>
 
-        <DataGrid x:Name="courseListGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="459" Margin="532,10,0,0" VerticalAlignment="Top" Width="250" IsReadOnly="True" SelectionChanged="CourseListSelcetionChanged">
+        <DataGrid x:Name="courseListGrid" SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="459" Margin="532,10,0,0" VerticalAlignment="Top" Width="250" IsReadOnly="True" SelectionChanged="CourseListSelcetionChanged">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
@@ -50,7 +50,7 @@
                 <DataGridTextColumn x:Name="courseNameColumn" Header="수업 명" Binding="{Binding Path=coursename}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="userListDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="279" Margin="10,234,0,0" VerticalAlignment="Top" Width="517">
+        <DataGrid x:Name="userListDataGrid" SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="279" Margin="10,234,0,0" VerticalAlignment="Top" Width="517">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>

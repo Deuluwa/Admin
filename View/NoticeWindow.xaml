@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="전달사항" Height="495.763" Width="795.233" ResizeMode="NoResize">
     <Grid>
-        <DataGrid x:Name="datagrid" HorizontalAlignment="Left" Height="445" Margin="537,10,0,0" VerticalAlignment="Top" Width="240" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="datagrid_SelectionChanged">
+        <DataGrid x:Name="datagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="445" Margin="537,10,0,0" VerticalAlignment="Top" Width="240" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="datagrid_SelectionChanged">
 
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">

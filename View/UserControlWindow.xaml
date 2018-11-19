@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="사용자 관리" Height="720" Width="932" ResizeMode="NoResize">
     <Grid>
-        <DataGrid x:Name="userDatagrid" HorizontalAlignment="Left" Height="474" Margin="732,52,0,0" VerticalAlignment="Top" Width="188" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="userDatagrid_SelectionChanged" PreviewMouseDown="userDatagrid_PreviewMouseDown">
+        <DataGrid x:Name="userDatagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="474" Margin="732,52,0,0" VerticalAlignment="Top" Width="188" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="userDatagrid_SelectionChanged" PreviewMouseDown="userDatagrid_PreviewMouseDown">
 
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
@@ -36,7 +36,7 @@
         <TextBox x:Name="phonenumberBox" Controls:TextBoxHelper.Watermark="010-1234-1234" HorizontalAlignment="Left" Height="37" Margin="156,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" FontSize="20" FontWeight="Bold"/>
         <TextBox x:Name="addressBox" Controls:TextBoxHelper.Watermark="(우편번호) 주소" Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="37" Margin="156,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="571" FontSize="20" FontWeight="Bold"/>
 
-        <DataGrid x:Name="courseDatagrid" HorizontalAlignment="Left" Height="461" Margin="10,220,0,0" VerticalAlignment="Top" Width="299" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="courseDatagrid_SelectionChanged">
+        <DataGrid x:Name="courseDatagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="461" Margin="10,220,0,0" VerticalAlignment="Top" Width="299" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="courseDatagrid_SelectionChanged">
 
             <DataGrid.CellStyle>
                 <Style TargetType="{x:Type DataGridCell}">
@@ -49,7 +49,7 @@
                 <DataGridTextColumn x:Name="courseName" Header="수업 명" Binding="{Binding coursename}" Width="299"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="attendanceDatagrid" HorizontalAlignment="Left" Height="461" Margin="314,220,0,0" VerticalAlignment="Top" Width="413" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="attendanceDatagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="461" Margin="314,220,0,0" VerticalAlignment="Top" Width="413" AutoGenerateColumns="False" IsReadOnly="True">
 
             <DataGrid.CellStyle>
                 <Style TargetType="{x:Type DataGridCell}">

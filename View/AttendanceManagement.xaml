@@ -5,10 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
+                      ResizeMode="NoResize"
         Title="출석 관리" Height="368.962" Width="800">
     <Grid>
-        <DataGrid x:Name="dateDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" AutoGenerateColumns="False" SelectionChanged="DateChanged">
+        <DataGrid SelectionMode="Single" x:Name="dateDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" AutoGenerateColumns="False" SelectionChanged="DateChanged">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
@@ -17,22 +19,29 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="날짜" Binding="{Binding Path=date}" Width="200"/>
+                <DataGridTextColumn Header="날짜" Binding="{Binding Path=date}" Width="200" IsReadOnly="True"/>
             </DataGrid.Columns>
             
         </DataGrid>
-        <DataGrid x:Name="userDataGrid" HorizontalAlignment="Left" Height="286" Margin="215,10,0,0" VerticalAlignment="Top" Width="567" AutoGenerateColumns="False">
+        <DataGrid x:Name="userDataGrid" SelectionMode="Single" HorizontalAlignment="Left" Height="286" Margin="215,10,0,0" VerticalAlignment="Top" Width="567" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="140"/>
-                <DataGridTextColumn Header="이름" Binding="{Binding Path=name}" Width="157"/>
-                <DataGridTextColumn Header="출석여부" Binding="{Binding Path=check}" Width="70"/>
-                <DataGridTextColumn Header="출석시간" Binding="{Binding Path=time}" Width="200"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=id}" Width="140" IsReadOnly="True"/>
+                <DataGridTextColumn Header="이름" Binding="{Binding Path=name}" Width="157" IsReadOnly="True"/>
+                <DataGridTextColumn Header="출석여부" Binding="{Binding Path=check}" Width="70" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="출석시간" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <xctk:DateTimeUpDown x:Name="checkTimePicker" Value="{Binding time}" Format="Custom" FormatString="HH:mm" ValueChanged="CheckTimePicker_ValueChanged"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="일괄 출석" HorizontalAlignment="Left" Margin="707,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="결석" HorizontalAlignment="Left" Margin="627,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="지각" HorizontalAlignment="Left" Margin="547,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="출석" HorizontalAlignment="Left" Margin="467,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="일괄 출석" HorizontalAlignment="Left" Margin="707,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White" Click="AllCheck_Click"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="결석" HorizontalAlignment="Left" Margin="627,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White" Click="Absent_Click"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="지각" HorizontalAlignment="Left" Margin="547,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White" Click="Tardy_Click"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="출석" HorizontalAlignment="Left" Margin="467,301,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White" Click="Check_Click"/>
+        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="적용" HorizontalAlignment="Left" Margin="387,300,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#CC119EDA" Foreground="White" Click="Save_Click"/>
 
     </Grid>
 </Controls:MetroWindow>

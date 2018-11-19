@@ -36,6 +36,7 @@
             <iconPacks:PackIconMaterial Kind="Logout" Height="80" Width="80" Foreground="White"/>
         </Controls:Tile>
         <DataGrid 
+            SelectionMode="Single"
             x:Name="datagrid"
             Margin="10,511,10,10"
             AutoGenerateColumns="False" IsReadOnly="True"

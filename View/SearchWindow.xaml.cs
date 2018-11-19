@@ -49,6 +49,10 @@ namespace DeuluwaPIM.View
         List<Result> resultList;
         Category category = Category.NONE;
 
+        bool sended = false;
+
+        List<string> resultReturn;
+
         public SearchWindow(Category category)
         {
             InitializeComponent();
@@ -65,11 +69,11 @@ namespace DeuluwaPIM.View
             DataGridRow row = sender as DataGridRow;
             Result result = row.Item as Result;
 
-            List<string> resultReturn = new List<string>();
+            resultReturn = new List<string>();
             resultReturn.Add(result.index);
             resultReturn.Add(result.name);
 
-            exitActionEvent(resultReturn);
+            sended = true;
             Close();
         }
 
@@ -129,6 +133,11 @@ namespace DeuluwaPIM.View
         private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape) Close();
+        }
+
+        private void MetroWindow_Closed(object sender, System.EventArgs e)
+        {
+            if(sended) exitActionEvent(resultReturn);
         }
     }
 }
