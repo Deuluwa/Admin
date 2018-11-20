@@ -98,6 +98,9 @@
     <Compile Include="View\AttendanceManagement.xaml.cs">
       <DependentUpon>AttendanceManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ClassManagementWindow.xaml.cs">
+      <DependentUpon>ClassManagementWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CourseWindow.xaml.cs">
       <DependentUpon>CourseWindow.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
       <DependentUpon>UserControlWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AttendanceManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClassManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

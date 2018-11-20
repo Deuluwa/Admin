@@ -96,6 +96,9 @@ namespace DeuluwaPIM.View
         private void ClassManagement(object sender, RoutedEventArgs e)
         {
             //교실 관리
+            var window = new ClassManagementWindow();
+
+            window.ShowDialog();
         }
 
         private void Setting(object sender, RoutedEventArgs e)
