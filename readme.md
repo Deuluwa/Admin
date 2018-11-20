@@ -1,5 +1,5 @@
 # DeuluwaPIM(Deuluwa Personal Information Management)
-![](https://github.com/HEROHJK/Deuluwa/blob/master/DeuluwaPIM/screenshot.jpg?raw=True)
+![](https://github.com/Deuluwa/Admin/blob/master/screenshot.jpg?raw=true)
 
 ## 릴리즈 다운로드
 [https://github.com/Deuluwa/Admin/releases](https://github.com/Deuluwa/Admin/releases)
