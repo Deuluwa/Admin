@@ -8,7 +8,8 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
                       ResizeMode="NoResize"
-        Title="출석 관리" Height="368.962" Width="800">
+                      ShowInTaskbar="False"
+        Title="출석 관리" Height="368.962" Width="800" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Grid>
         <DataGrid SelectionMode="Single" x:Name="dateDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" AutoGenerateColumns="False" SelectionChanged="DateChanged">
             <DataGrid.CellStyle>

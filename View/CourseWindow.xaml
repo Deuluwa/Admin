@@ -8,7 +8,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
         mc:Ignorable="d"
-        Title="CourseWindow" Height="552" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    ShowInTaskbar="False"
+        Title="CourseWindow" Height="552" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Grid>
         <Label Content="수업 명" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label Content="강사 명" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontWeight="Bold"/>

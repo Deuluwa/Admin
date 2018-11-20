@@ -8,9 +8,9 @@ using System.Windows;
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
 [assembly: AssemblyTitle("DeuluwaPIM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Deuluwa 관리자 프로그램")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("HJ.K Company")]
 [assembly: AssemblyProduct("DeuluwaPIM")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

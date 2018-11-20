@@ -7,6 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="" Height="450" Width="300" ResizeMode="NoResize"
+                      ShowInTaskbar="False"
                       WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
     <Grid>
         <Grid Margin="10,136,10,212">

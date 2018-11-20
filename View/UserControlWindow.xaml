@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
         mc:Ignorable="d"
-        Title="사용자 관리" Height="720" Width="932" ResizeMode="NoResize">
+    ShowInTaskbar="False"
+        Title="사용자 관리" Height="720" Width="932" ResizeMode="NoResize" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Grid>
         <DataGrid x:Name="userDatagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="474" Margin="732,52,0,0" VerticalAlignment="Top" Width="188" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="userDatagrid_SelectionChanged" PreviewMouseDown="userDatagrid_PreviewMouseDown">
 

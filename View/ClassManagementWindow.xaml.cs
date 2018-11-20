@@ -216,5 +216,10 @@ namespace DeuluwaPIM.View
                 return false;
             }
         }
+
+        private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape) this.Close();
+        }
     }
 }

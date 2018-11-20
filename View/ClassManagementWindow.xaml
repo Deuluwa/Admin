@@ -6,7 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
         mc:Ignorable="d"
-        Title="교실 관리" Height="427.119" Width="589.301" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+                      ShowInTaskbar="False"
+        Title="교실 관리" Height="427.119" Width="589.301" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+                      PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Grid>
         <DataGrid x:Name ="classList" HorizontalAlignment="Left" Height="205" Margin="10,154,0,0" VerticalAlignment="Top" Width="563" AutoGenerateColumns="False" SelectionChanged="classList_SelectionChanged">
             <DataGrid.CellStyle>

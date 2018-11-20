@@ -6,7 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeuluwaPIM.View"
         mc:Ignorable="d"
-        Title="전달사항" Height="495.763" Width="795.233" ResizeMode="NoResize">
+    ShowInTaskbar="False"
+        Title="전달사항" Height="495.763" Width="795.233" ResizeMode="NoResize"
+    PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Grid>
         <DataGrid x:Name="datagrid" SelectionMode="Single" HorizontalAlignment="Left" Height="445" Margin="537,10,0,0" VerticalAlignment="Top" Width="240" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="datagrid_SelectionChanged">
 

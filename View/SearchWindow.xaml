@@ -9,6 +9,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         ShowTitleBar="False"
+                      ShowInTaskbar="False"
                       ShowCloseButton="False" 
         mc:Ignorable="d" Height="427.118" Width="567.373" ResizeMode="NoResize" PreviewKeyDown="MetroWindow_PreviewKeyDown" Closed="MetroWindow_Closed">
     <Grid>
